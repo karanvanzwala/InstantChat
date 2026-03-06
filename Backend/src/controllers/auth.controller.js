@@ -3,7 +3,6 @@ import User from "../models/User.js";
 import bcrypt from "bcryptjs";
 
 export const signup = async (req, res) => {
-    console.log(req.body)
     const { fullName, email, password } = req.body;
     try {
 
@@ -35,10 +34,8 @@ export const signup = async (req, res) => {
 
 
         if (newUser) {
-            console.log(newUser._id, "[[[[")
-
-            generateToken(newUser._id, res)
-            await newUser.save()
+            const saveUser = await newUser.save()
+            generateToken(saveUser._id, res)
             return res.status(201).json({
                 _id: newUser._id,
                 fullName,

@@ -61,3 +61,46 @@ export const signup = async (req, res) => {
         console.log(error);
     }
 };
+
+
+export const login = async (req, res) => {
+    const { email, password } = req.body;
+
+    console.log(email, password, "{{}}")
+
+    try {
+        const user = await User.findOne({ email })
+
+        if (!user) return res.status(400).json({ message: "Invalid credentials" })
+        // never tell the client wich one is incorrect:password or email
+
+        const isPosswordCorrect = await bcrypt.compare(password, user.password)
+        if (!isPosswordCorrect) return res.status(400).json({ message: "Invalid credintial" })
+
+        generateToken(user._id, res)
+        res.status(200).json({
+            _id: User._id,
+            fullName: User.fullName,
+            email: User.email,
+            profilePic: User.profilePic,
+            message: "User created successfully",
+        })
+
+    } catch (error) {
+        console.error("Error in login conrtoller:", error)
+        res.status(500).json({ message: "Internal server error" })
+    }
+
+}
+
+
+
+export const logout = async (_, res) => {
+    res.cookie("jwt", "", { maxAge: 0 })
+    res.status(200).json({ message: "Logged out succesfully" })
+
+}
+
+export const updateProfile = async (req, res) => {
+
+}

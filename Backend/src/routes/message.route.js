@@ -1,10 +1,14 @@
 import express from "express";
+import { getAllContacts } from "../controllers/message.controller.js";
+import { protectRoute } from "../middleware/auth.middleware.js";
 
 const router = express.Router()
 
-router.get("/hello", (req, res) => {
-    res.send("hello i am from message side")
-console.log("Singup")
-})
+
+router.get("/contacts", protectRoute, getAllContacts)
+// router.ger("/chats", getChatPartners)
+// router.ger("/:id", getMessagesByUserId)
+
+// router.post("/send:id", sendMessage)
 
 export default router;

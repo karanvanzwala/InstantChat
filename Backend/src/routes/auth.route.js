@@ -8,19 +8,19 @@ const router = express.Router()
 // router.use(arcjetProtection);
 
 
-console.log("90909")
+// console.log("90909")
 router.post("/signup", signup)
 
 
-router.get("/test", (req, res) => {
-    console.log("666776")
-    res.send("hello i am from message side")
+// router.get("/test", (req, res) => {
+//     console.log("666776")
+//     res.send("hello i am from message side")
 
-})
+// })
 
 router.post("/login", login)
 router.post("/logout", logout)
-router.post("/update-profile", protectRoute, updateProfile)
+router.put("/update-profile", protectRoute, updateProfile)
 
 router.get("/check", protectRoute, (req, res) => res.status(200).json(req.user));
 

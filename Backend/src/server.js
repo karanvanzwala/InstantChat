@@ -26,7 +26,7 @@ app.use(cookieParser());
 
 
 
-console.log("///////")
+// console.log("///////")
 
 app.use("/api/auth", authRoutes);
 app.use("/api/messages", messageRoutes);

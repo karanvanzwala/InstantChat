@@ -85,6 +85,7 @@ export const useChatStore = create((set, get) => ({
     },
 
     subscribeToMessages: () => {
+
         const { selectedUser, isSoundEnabled } = get();
         if (!selectedUser) return;
 
@@ -107,6 +108,7 @@ export const useChatStore = create((set, get) => ({
     },
 
     unsubscribeFromMessages: () => {
+
         const socket = useAuthStore.getState().socket;
         socket.off("newMessage");
     },
